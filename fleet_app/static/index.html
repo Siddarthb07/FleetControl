@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleet Control</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow">homelab-rpi</p>
+      <h1>Fleet Control</h1>
+      <p class="sub">Dual-mode: stub memory pool across hosts, or Anima probes on main. Measured workload RSS — not shared RAM on one PC.</p>
+    </div>
+    <div class="token-box">
+      <div class="token-row">
+        <label for="token">Fleet token</label>
+        <input id="token" type="password" autocomplete="off" placeholder="FLEET_TOKEN" />
+        <button type="button" id="saveToken" class="btn ghost">Save</button>
+      </div>
+      <p class="link" id="link"><i class="dot"></i><span id="linkText">connecting…</span></p>
+    </div>
+  </header>
+
+  <div class="banner hidden" id="banner"></div>
+
+  <section class="panel master">
+    <div class="master-left">
+      <span class="state-chip" id="stateChip">off</span>
+      <p class="mode-line" id="modeLine">runtime=stub · memory pool demo</p>
+      <p id="message" class="message">—</p>
+      <div class="preset-row">
+        <label for="preset">Starting shape</label>
+        <select id="preset"></select>
+      </div>
+      <p class="hint-inline">Disable → change shape → enable. Stub shapes pool RAM slabs; Anima shape runs probes on main only.</p>
+    </div>
+    <div class="master-actions">
+      <a class="btn ghost hidden" id="btnAnima" href="http://127.0.0.1:8010/health" target="_blank" rel="noopener">Open Anima</a>
+      <button type="button" id="btnEnable" class="btn primary">Enable pool</button>
+      <button type="button" id="btnDisable" class="btn danger">Disable pool</button>
+    </div>
+  </section>
+
+  <section class="panel pool-bar">
+    <div class="pool-meta">
+      <h2 id="poolTitle">Workload RAM</h2>
+      <p id="poolSummary">—</p>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="poolFill"></div></div>
+    <p class="hint" id="poolHint">Stub mode: bar = measured RSS / target stub. Planning GB is theoretical across hosts — not Anima’s heap.</p>
+  </section>
+
+  <section class="nodes" id="nodes"></section>
+  <p class="empty" id="empty">No node data yet — start an agent, or check the fleet token above.</p>
+
+  <footer class="foot">
+    <span>Tailscale / loopback only · house Pi-hole DNS is a separate stack (no shared fleet token)</span>
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
