@@ -77,3 +77,7 @@ python -m fleet_app.agent --control-url http://<main-tailscale-ip>:8787
 - Change `FLEET_TOKEN` before non-loopback bind.
 - Default bind `127.0.0.1`.
 - Logs under `logs/`.
+
+
+See also the root [COMMANDS.md](../docs/COMMANDS.md).
+
