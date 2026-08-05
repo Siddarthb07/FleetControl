@@ -33,3 +33,8 @@ Copy-paste commands: [docs/COMMANDS.md](docs/COMMANDS.md)
 ## License
 
 MIT © Siddarth Boggarapu
+
+## Status
+
+Active: stub pool + Anima dual-mode on main. Cross-LAN Anima probes are out of scope.
+
