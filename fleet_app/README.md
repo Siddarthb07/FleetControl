@@ -9,18 +9,16 @@ Modes are mutually exclusive per enable (disable → change Starting shape → e
 
 Copy-paste commands: [docs/COMMANDS.md](../docs/COMMANDS.md).
 
-House NAS/DNS is separate — [docs/pihole-bringup.md](../docs/pihole-bringup.md). Do not reuse `FLEET_TOKEN` for Pi-hole.
-
 ## Quick start
 
 ```powershell
-cd homelab-rpi
+cd C:\path\to\FleetControl
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements-fleet.txt
+pip install -r requirements.txt
 copy .env.example .env
 $env:FLEET_TOKEN="dev-change-me"
-$env:ANIMA_ROOT="C:\Users\siddu\gh-audit\Anima"
+$env:ANIMA_ROOT="C:\path\to\Anima"
 python -m fleet_app.api
 ```
 
@@ -32,8 +30,8 @@ Open `http://127.0.0.1:8787/` → Save token → pick shape → Enable.
 $env:FLEET_TOKEN="dev-change-me"
 $env:FLEET_NODE_ID="main"
 $env:FLEET_GROSS_RAM_GB="16"
-$env:ANIMA_ROOT="C:\Users\siddu\gh-audit\Anima"
-python -m fleet_app.agent --control-url http://127.0.0.1:8787
+$env:ANIMA_ROOT="C:\path\to\Anima"
+python -m fleet_app.agent --node-id main --control-url http://127.0.0.1:8787
 ```
 
 ### Stub pool on i7 / Mac
@@ -42,7 +40,7 @@ python -m fleet_app.agent --control-url http://127.0.0.1:8787
 $env:FLEET_TOKEN="..."
 $env:FLEET_NODE_ID="i7"
 $env:FLEET_GROSS_RAM_GB="12"
-python -m fleet_app.agent --control-url http://<main-tailscale-ip>:8787
+python -m fleet_app.agent --node-id i7 --control-url http://<main-tailscale-ip>:8787
 ```
 
 ## Starting shapes
@@ -57,7 +55,7 @@ python -m fleet_app.agent --control-url http://<main-tailscale-ip>:8787
 
 ## Honesty
 
-- Stub “planning usable GB” is theoretical across hosts — not 20 GB on main, and **not** Anima’s heap.
+- Stub "planning usable GB" is theoretical across hosts — not shared RAM on one box, and **not** Anima's heap.
 - Anima needs a working checkout at `ANIMA_ROOT` with HF + probe zoo as required by Anima itself.
 - Cross-LAN Anima probes on sharded layers are **not** implemented (Anima hooks are in-process).
 
@@ -78,6 +76,4 @@ python -m fleet_app.agent --control-url http://<main-tailscale-ip>:8787
 - Default bind `127.0.0.1`.
 - Logs under `logs/`.
 
-
-See also the root [COMMANDS.md](../docs/COMMANDS.md).
-
+See also the root [README.md](../README.md) and [docs/COMMANDS.md](../docs/COMMANDS.md).
